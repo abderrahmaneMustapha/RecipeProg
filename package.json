@@ -1,0 +1,38 @@
+{
+  "name": "recipe-progress",
+  "version": "1.0.0",
+  "description": " help thse who want learn to coock to trach there progress",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "devstart": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abderrahmaneMustapha/RecipeProg.git"
+  },
+  "keywords": [
+    "recipe",
+    "food",
+    "code",
+    "node",
+    "express",
+    "first",
+    "app"
+  ],
+  "author": "Toumi ABderrahmane",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abderrahmaneMustapha/RecipeProg/issues"
+  },
+  "homepage": "https://github.com/abderrahmaneMustapha/RecipeProg#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.4",
+    "moment": "^2.27.0",
+    "mongoose": "^5.9.19"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
