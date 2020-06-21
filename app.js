@@ -9,7 +9,7 @@ const app = express()
 
 // connect to the database
 var uri = "mongodb://localhost:27017/recipe"
-mongoose.connect(uri)
+mongoose.connect(uri, { useNewUrlParser: true })
 var db = mongoose.connection
 // error
 db.on('error', console.error.bind("connection error"))
@@ -20,6 +20,7 @@ db.on("open", ()=> {
 // middlewares and rooters
 const logger = require('./helper/logger')
 const routers = require('./routes/index')
+
 // Handle bars middlware
 app.engine( 'hbs', hbs( {
     extname: 'hbs',
@@ -32,12 +33,14 @@ app.set('view engine', 'hbs');
 // init static file folder
 app.use(express.static(path.join(__dirname,'public')))
 
-// logger
+// use logger
 app.use(logger)
 
-// routes
+// use routes
 app.use(routers.home)
 app.use(routers.about)
+
+// add models
 
 const PORT = process.env.PORT || 8000
 app.listen(PORT, ()=> console.log(`Server started at port ${PORT}`))
