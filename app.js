@@ -1,8 +1,23 @@
 const express  = require('express')
 const path = require('path')
 const hbs = require('express-handlebars')
+const mongoose = require('mongoose')
+
+
 const app = express()
 
+
+// connect to the database
+var uri = "mongodb://localhost:27017/recipe"
+mongoose.connect(uri)
+var db = mongoose.connection
+// error
+db.on('error', console.error.bind("connection error"))
+db.on("open", ()=> {
+  console.log("MongoDB database connection established successfully");
+});
+
+// middlewares and rooters
 const logger = require('./helper/logger')
 const routers = require('./routes/index')
 // Handle bars middlware
