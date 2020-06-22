@@ -9,7 +9,7 @@ home = router.get('/', (req, res, next) => {
 })
 
 home = router.post('/signup', validation, (req, res, next) => {
-  console.log(req.body)
+  console.log(req)
   //console.log(req.body.email)
   //console.log(req.body.password)
    const errors = validationResult(req)

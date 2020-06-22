@@ -31,7 +31,8 @@ app.engine( 'hbs', hbs( {
 app.set('view engine', 'hbs');
 
 // init static file folder
-app.use(express.static(path.join(__dirname,'public')))
+app.use(express.static(path.join(__dirname,'/public')))
+
 
 // use logger
 app.use(logger)
