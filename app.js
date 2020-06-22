@@ -9,7 +9,7 @@ const app = express()
 
 // connect to the database
 var uri = "mongodb://localhost:27017/recipe"
-mongoose.connect(uri, { useNewUrlParser: true })
+mongoose.connect(uri, { useNewUrlParser: true , useUnifiedTopology: true })
 var db = mongoose.connection
 // error
 db.on('error', console.error.bind("connection error"))
@@ -31,6 +31,8 @@ app.engine( 'hbs', hbs( {
 app.set('view engine', 'hbs');
 
 // init static file folder
+app.use(express.json());
+app.use(express.urlencoded());
 app.use(express.static(path.join(__dirname,'/public')))
 
 
@@ -38,6 +40,7 @@ app.use(express.static(path.join(__dirname,'/public')))
 app.use(logger)
 
 // use routes
+
 app.use(routers.home)
 app.use(routers.about)
 
