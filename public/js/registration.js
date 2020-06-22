@@ -39,10 +39,13 @@ set_errors = (errors) =>{
 
 remove_errors = ()=>{
     errors = document.getElementsByClassName('error')
-    Array.prototype.forEach.call(errors, element=>{
-        element.remove()
-    })
-
+    if (errors[0]){
+        Array.prototype.forEach.call(errors, element=>{
+            element.remove()
+        })
+    
+    }
+   
 }
 
 
@@ -66,12 +69,18 @@ submit_btn.addEventListener('click', (e)=>{
             return response.json()
           
         }
+        else{
+            return response.json()
+        }
         
        
     }).then((data)=>{
-        console.log(data.errors)
-       
-        set_errors(data.errors)
+        
+       if (data){
+           if(data.url) window.location.replace(data.url)
+           if(data.errors) set_errors(data.errors)        
+       }
+        
     })
 })
 
