@@ -10,7 +10,6 @@ home = router.get('/', (req, res, next) => {
 })
 
 signup = router.post('/signup', validation, (req, res, next) => {
-  console.log(req.body)
    const errors = validationResult(req)
    if(!errors.isEmpty()){
      
@@ -21,6 +20,8 @@ signup = router.post('/signup', validation, (req, res, next) => {
    register(req.body.username,
             req.body.email,
             req.body.password,)
+    req.user  = req.body.username
+    console.log(req.user)
   // user created successfuly tell the client
   return res.status(200).json({url : `/profile?username=${req.body.username}`})
 
@@ -28,6 +29,7 @@ signup = router.post('/signup', validation, (req, res, next) => {
 })
 
 profiles = router.get('/profile', (req, res, next) => {
+  console.log("username in the profile ", res.user)
   res.render('profile', {layout: 'default', template: 'profile-template'});
 })
 about = router.get('/about', (req, res, next) => {
