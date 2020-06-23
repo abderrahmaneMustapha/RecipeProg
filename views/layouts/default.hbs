@@ -10,9 +10,12 @@
   <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" type="text/css">
 </head>
 <body class="{{template}}">
-  <div class="container">
-    {{> side-nav}}
-	  {{{body}}}
+  <div class="container-fluid">  
+    <div class="row">
+      {{{body}}}           
+      {{> side-nav}}
+    </div>
+    
   </div>
   {{> footer}}
 </body>

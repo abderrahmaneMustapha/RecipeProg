@@ -1,0 +1,13 @@
+.grid-2-auto{
+    column-count: 2;
+}
+.h-20{
+    height: 10%;
+    max-height: fit-content;
+}
+.border-none, .list-group, .list-group-item {
+    border: 0em none transparent;
+}
+#side-bar{
+    height: 100vh;
+}
