@@ -1,14 +1,33 @@
+/* grids and flex boxes */
 .grid-2-auto{
     column-count: 2;
 }
+
+/* width and height */
 .h-20{
     height: 10%;
     max-height: fit-content;
 }
-.border-none, .list-group, .list-group-item {
-    border: 0em none transparent;
-}
 #side-bar{
     height: 100vh;
 }
+/* borders */
+.border-none, .list-group, .list-group-item {
+    border: 0em none transparent;
+}
+
+/* centering */
+
+.form-center{
+   
+    display: grid;
+    place-content: center;
+}
+
+/* margin */
+.pt-10{
+ margin-top: 10vh;
+}
+
+/* fonts heights */
 
