@@ -20,8 +20,8 @@ signup = router.post('/signup', validation, (req, res, next) => {
    register(req.body.username,
             req.body.email,
             req.body.password,)
-    req.user  = req.body.username
-    console.log(req.user)
+ 
+  
   // user created successfuly tell the client
   return res.status(200).json({url : `/profile?username=${req.body.username}`})
 

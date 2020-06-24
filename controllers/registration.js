@@ -1,6 +1,7 @@
 let models = require('../models/models')
-
+let hash = require('../helper/hashing')
 create_user = (username,  email, password)=>{
+    password =  hash(password)
     new_user  = new  models({username : username, email: email, password:password})
     new_user.save((err)=>{
     if(err){
@@ -12,5 +13,15 @@ create_user = (username,  email, password)=>{
 
     })
 }
+
+login_user =  (username, password)=>{
+    password = hash(password)
+
+    return models.find( u=>{
+        return u.username === username && u.password === password
+    })
+}
+
+
 
 module.exports = create_user
