@@ -12,7 +12,12 @@ create_user  = (username,  email, password, fn,res,req)=>{
                 if(err){
                     return false
                 }
-                else{    
+                else{   
+                    req.session.user = {
+                        username : req.body.username,
+                        email : req.body.email,
+                        is_authenticated : true
+                    } 
                     return res.status(200).json({url : `/profile?username=${req.body.username}`})
                 }
             }) 

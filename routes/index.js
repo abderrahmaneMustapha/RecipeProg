@@ -23,10 +23,7 @@ signup = router.post('/signup', validation, (req, res, next) => {
    new_user =  register.create_user(req.body.username,
             req.body.email,
             req.body.password, responses_help.already_existing_user,res,req) 
-    req.session.user = {
-      username : req.body.username,
-      email : req.body.email
-    }
+   
 })
 
 profile = router.get('/profile', (req, res, next) => {
