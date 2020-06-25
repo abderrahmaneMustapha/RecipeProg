@@ -28,8 +28,10 @@
   "homepage": "https://github.com/abderrahmaneMustapha/RecipeProg#readme",
   "dependencies": {
     "bootstrap": "^4.5.0",
+    "connect-mongodb-session": "^2.3.3",
     "express": "^4.17.1",
     "express-handlebars": "^4.0.4",
+    "express-session": "^1.17.1",
     "express-validator": "^6.6.0",
     "moment": "^2.27.0",
     "mongoose": "^5.9.19"

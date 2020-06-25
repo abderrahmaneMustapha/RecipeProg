@@ -23,14 +23,10 @@ signup = router.post('/signup', validation, (req, res, next) => {
    // create a user
    new_user =  register.create_user(req.body.username,
             req.body.email,
-            req.body.password, responses_help.already_existing_user,res)  
-
-
-  // user created successfuly tell the client
-    return res.status(200).json({url : `/profile?username=${req.body.username}`})
+            req.body.password, responses_help.already_existing_user,res,req) 
 })
 
-profiles = router.get('/profile', (req, res, next) => {
+profile = router.get('/profile', (req, res, next) => {
 
   res.render('profile', {layout: 'default', template: 'profile-template'});
 })
@@ -39,4 +35,4 @@ about = router.get('/about', (req, res, next) => {
   })
 
 
-module.exports = {home, about}
+module.exports = {home, about,profile}

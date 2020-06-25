@@ -2,30 +2,28 @@ let models = require('../models/models')
 let hash = require('../helper/hashing')
 const { response } = require('express')
 const { model } = require('../models/models')
- function create_user  (username,  email, password, fn,res){
+create_user  = (username,  email, password, fn,res,req)=>{
     
     models.exists({username:username}).then(( exists)=>{
         if (!exists){
             new_user  = new  models({username : username, email: email, password:hash(password)})
+            
             new_user.save((err)=>{
                 if(err){
                     return false
                 }
                 else{    
-                    return true
+                    return res.status(200).json({url : `/profile?username=${req.body.username}`})
                 }
             }) 
         }else{
-            fn( [{value: username,
+            return fn( [{value: username,
             msg: 'username already exists',
             param: 'username',
             location: 'body'}] , res)
         }
-        
-       
+          
      })
-  
-  
    
 }
 
