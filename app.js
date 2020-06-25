@@ -2,7 +2,8 @@ const express  = require('express')
 const path = require('path')
 const hbs = require('express-handlebars')
 const mongoose = require('mongoose')
-
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 const app = express()
 
@@ -20,6 +21,7 @@ db.on("open", ()=> {
 // middlewares and rooters
 const logger = require('./helper/logger')
 const routers = require('./routes/index')
+const  sessions  = require('./controllers/sessions')
 
 // Handle bars middlware
 app.engine( 'hbs', hbs( {
@@ -38,6 +40,32 @@ app.use(express.static(path.join(__dirname,'/public')))
 
 // use logger
 app.use(logger)
+
+// sessions
+store = new MongoDBStore({
+  uri : uri,
+  collection : 'recipeProgSessions'
+})
+
+store.on('error', (error)=>{
+  console.error(error)
+})
+
+rexpress_session = require('express-session')({
+  secret: 'keyboard cat',
+  credentials: 'include',
+  cookie: {
+  maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+  },
+  store: store,
+  // Boilerplate options, see:
+  // * https://www.npmjs.com/package/express-session#resave
+  // * https://www.npmjs.com/package/express-session#saveuninitialized
+  resave: true,
+  saveUninitialized: true
+})
+app.use(rexpress_session)
+// sessions setup end
 
 // use routes
 
