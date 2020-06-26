@@ -21,7 +21,7 @@ db.on("open", ()=> {
 // middlewares and rooters
 const logger = require('./helper/logger')
 const routers = require('./routes/index')
-const  sessions  = require('./controllers/sessions')
+
 
 // Handle bars middlware
 app.engine( 'hbs', hbs( {
@@ -68,10 +68,11 @@ app.use(rexpress_session)
 // sessions setup end
 
 // use routes
-
+app.use(routers.signout)
 app.use(routers.home)
 app.use(routers.about)
 app.use(routers.profile)
+
 
 const PORT = process.env.PORT || 8000
 app.listen(PORT, ()=> console.log(`Server started at port ${PORT}`))

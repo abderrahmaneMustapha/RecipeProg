@@ -1,7 +1,5 @@
 let models = require('../models/models')
 let hash = require('../helper/hashing')
-const { response } = require('express')
-const { model } = require('../models/models')
 create_user  = (username,  email, password, fn,res,req)=>{
     
     models.exists({username:username}).then(( exists)=>{

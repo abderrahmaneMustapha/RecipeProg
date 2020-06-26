@@ -26,11 +26,17 @@ signup = router.post('/signup', validation, (req, res, next) => {
    
 })
 
+signout = router.get('/logout', (req,res,next)=>{
+  console.log("user login out...")
+  req.session.user.is_authenticated = false
+  res.redirect('/');
+})
+
 profile = router.get('/profile', (req, res, next) => {
   is_your_profile = true
   template  = "othersprofile-template"
   view = "others-profile"
-  if(req.query.username == req.session.user.username){
+  if(req.query.username == req.session.user.username && req.session.user.is_authenticated){
    is_your_profile = true
    template  = "userprofile-template"
    view = "user-profile"
@@ -43,4 +49,4 @@ about = router.get('/about', (req, res, next) => {
   })
 
 
-module.exports = {home, about,profile}
+module.exports = {home, about,profile, signout}
