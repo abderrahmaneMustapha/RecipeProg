@@ -1,28 +1,74 @@
 <div class="col-10"> 
    {{> nav-bar-controller}}
-   <div class="mt-5">
-      <h1 class="h2 text-center">ReciProg Signup form</h1>
-   </div>
-  <div class="pt-10" id="signup-form">
-      <form class="form-center" action="/signup/" method="post">
-        <div class="form-group">
-          <label for="exampleInputUsername">Username</label>
-          <input name="username" type="username" class="form-control" id="exampleInputUsername" aria-describedby="usernameHelp">
+   
+  <div id="registration-form" class="container mt-5 form-center">
+    <!-- navbar container -->
+      <div class="text-center mb-4">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item">
+            <a  goto='signup' class="nav-link nav-registration active " href="#signup">Signup</a>
+          </li>
+          <li class="nav-item">
+            <a goto='login' class="nav-link nav-registration" href="#login">Login</a>
+          </li>
+        </ul>
+      </div>
+      <!-- navbar container end -->
+      
+    <!-- signup container -->
+    <div class="d-show" id="signup">
+        <div>
+          <h1 class="h2 text-center">ReciProg Signup form</h1>
         </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          
-        </div>
-        <div class="form-group">
-          <label   for="exampleInputPassword1">Password</label>
-          <input  name="password" type="password" class="form-control" id="exampleInputPassword1">
-          <small id="passwordHelp" class="form-text text-muted">use strong password please</small>
-        </div>
+         <div class="pt-10" id="signup-form">
+        <form  action="/signup/" method="post">
+          <div class="form-group">
+            <label for="exampleInputUsername">Username</label>
+            <input name="username" type="username" class="form-control" id="exampleInputUsername" aria-describedby="usernameHelp">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            
+          </div>
+          <div class="form-group">
+            <label   for="exampleInputPassword1">Password</label>
+            <input  name="password" type="password" class="form-control" id="exampleInputPassword1">
+            <small id="passwordHelp" class="form-text text-muted">use strong password please</small>
+          </div>
 
-        <button id="submit-btn" type="submit" class="btn btn-primary">Submit</button>
-    </form>
-    
+          <button id="signup-submit-btn" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      
+      </div>
+   </div>
+     <!-- signup container end-->
+
+    <!-- login container -->
+    <div class="d-none" id="login">
+       <div >
+            <h1 class="h2 text-center">ReciProg Login form</h1>
+          </div>
+        <div class="pt-10" id="login-form">
+         
+          <form action="/login/" method="post">
+            <div class="form-group">
+              <label for="exampleInputUsername">Username</label>
+              <input name="username" type="username" class="form-control" id="exampleInputUsername" aria-describedby="usernameHelp">
+            </div>
+            <div class="form-group">
+              <label   for="exampleInputPassword1">Password</label>
+              <input  name="password" type="password" class="form-control" id="exampleInputPassword1">
+              <small id="passwordHelp" class="form-text text-muted">use strong password please</small>
+            </div>
+
+            <button id="login-submit-btn" type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        
+        </div>
+    </div>    
+    <!-- login container end -->
   </div>
+ 
   
 </div>

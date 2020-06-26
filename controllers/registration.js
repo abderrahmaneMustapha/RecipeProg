@@ -30,7 +30,7 @@ create_user  = (username,  email, password, fn,res,req)=>{
    
 }
 
-login_user =  (username, password)=>{
+login_user =  (username, password,res)=>{
     password = hash(password)
     
      models.findOne({username : username }, (err, user) =>{

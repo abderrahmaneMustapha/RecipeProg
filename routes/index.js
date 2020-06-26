@@ -32,6 +32,7 @@ signup = router.post('/signup', validation, (req, res, next) => {
 
 login = router.post('/login', (req,res,next)=>{
  console.log("login post request....")
+ login_user(username, password, res)
 })
 
 signout = router.get('/logout', (req,res,next)=>{
@@ -50,11 +51,11 @@ profile = router.get('/profile', (req, res, next) => {
    view = "user-profile"
   }
  
-  res.render(view, {layout: 'default', template: template, is_authenticated : is_auth});
+  res.render(view, {layout: 'default', template: template, is_authenticated : req.session.user.is_authenticated});
 })
 
 about = router.get('/about', (req, res, next) => {
-    res.render('about', {layout: 'default', template: 'about-template', is_authenticated : is_auth});
+    res.render('about', {layout: 'default', template: 'about-template', is_authenticated : req.session.user.is_authenticated});
 })
 
 
