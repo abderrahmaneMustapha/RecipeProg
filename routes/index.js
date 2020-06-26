@@ -5,25 +5,33 @@ const { body,validationResult,  sanitizeBody, check } = require('express-validat
 const validation = require('../controllers/validation')
 const register  = require('../controllers/registration')
 const responses_help = require('../helper/responses')
+
 home = router.get('/', (req, res, next) => {
-  res.render('home', {layout: 'default', template: 'home-template'});
+  is_auth = req.session.user ? req.session.user.is_authenticated : false
+  if (is_auth){
+    return res.render('home', {layout: 'default', template: 'home-template', is_authenticated : is_auth})
+  }
+  return res.render('signup', {layout: 'default', template: 'home-template'});
 })
 
 signup = router.post('/signup', validation, (req, res, next) => {
   // validate the form
    const errors = validationResult(req)
-
   
    if(!errors.isEmpty()){
       /// if there is an error tell the client
      return res.status(422).json({errors : errors.array()})
    }
-
    // create a user
    new_user =  register.create_user(req.body.username,
             req.body.email,
-            req.body.password, responses_help.already_existing_user,res,req) 
+            req.body.password, responses_help.already_existing_user,res,req
+            ) 
    
+})
+
+login = router.post('/login', (req,res,next)=>{
+ console.log("login post request....")
 })
 
 signout = router.get('/logout', (req,res,next)=>{
@@ -42,11 +50,12 @@ profile = router.get('/profile', (req, res, next) => {
    view = "user-profile"
   }
  
-  res.render(view, {layout: 'default', template: template});
+  res.render(view, {layout: 'default', template: template, is_authenticated : is_auth});
 })
+
 about = router.get('/about', (req, res, next) => {
-    res.render('about', {layout: 'default', template: 'about-template'});
-  })
+    res.render('about', {layout: 'default', template: 'about-template', is_authenticated : is_auth});
+})
 
 
 module.exports = {home, about,profile, signout}
