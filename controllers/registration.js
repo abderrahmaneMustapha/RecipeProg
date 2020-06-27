@@ -30,18 +30,26 @@ create_user  = (username,  email, password, fn,res,req)=>{
    
 }
 
-login_user =  (username, password,res)=>{
+login_user =  (username, password,res,req)=>{
     password = hash(password)
     
-     models.findOne({username : username }, (err, user) =>{
+    
+    models.findOne({username : username }, (err, user) =>{
         if(user.password === password){
-            console.log("login")
+            req.session.user = {
+                username : req.body.username,
+                email : req.body.email,
+                is_authenticated : true
+            } 
+            return res.status(200).json({url : `/profile?username=${req.body.username}`})
         }
         else{
-            console.log('wrong password')
-            console.log("your password is", password)
-            console.log("the real password is",user.password)
-            console.log("the user name is ", username)
+            
+            return res.status(422).json({errors : [{
+                value: password,
+                msg: 'wrong password or username',
+                param: 'passwordLogin',
+                location: 'body'}]})
         }
     })
 }

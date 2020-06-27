@@ -32,7 +32,7 @@ signup = router.post('/signup', validation, (req, res, next) => {
 
 login = router.post('/login', (req,res,next)=>{
  console.log("login post request....")
- login_user(username, password, res)
+ login_user(req.body.usernameLogin, req.body.passwordLogin, res,req)
 })
 
 signout = router.get('/logout', (req,res,next)=>{

@@ -1,6 +1,37 @@
+nav_registrations = document.getElementsByClassName('nav-registration')
 form  =  document.getElementsByTagName('form')[0]
 inputs = form.getElementsByTagName('input')
-submit_btn = document.getElementById('submit-btn')
+signup_submit_btn = document.getElementById('signup-submit-btn')
+login_submit_btn = document.getElementById('login-submit-btn')
+
+remove_class= (elements , class_name)=>{
+    Array.prototype.forEach.call(elements, element=>{
+        element.classList.remove(class_name)
+    })
+}
+
+
+Array.prototype.forEach.call(nav_registrations, element=>{
+  
+    element.addEventListener('click', (e)=>{
+        remove_class(nav_registrations, 'active')
+        e.path[0].className+=  " active"
+        id = e.path[0].getAttribute('goto')
+        document.getElementsByClassName('d-show')[0].className="d-none"
+        document.getElementById(id).className="d-show"
+        
+        form  =  document.getElementById(`${id}-form`)
+        inputs = form.getElementsByTagName('input')
+      
+        signup_submit_btn = document.getElementById('signup-submit-btn')
+        login_submit_btn = document.getElementById('login-submit-btn')
+
+
+    })
+})
+
+
+//////////// REEGISTRATION PART
 
 /// HELPERS
 appendto_form = (inputs)=>{
@@ -16,22 +47,21 @@ appendto_form = (inputs)=>{
        
      })
 
-
-     
      return new URLSearchParams(formData)
 }
 
 set_errors = (errors) =>{
     errors.forEach((element)=>{
-       input = document.getElementsByName(element.param)[0]
+       input = document.querySelectorAll(`[name=${element.param}]`)[0]
+       console.log(input)
        parent= input.parentNode
  
        if (!parent.getElementsByClassName('bg-danger')[0]){
-        small = document.createElement('small')
-        small.className = " p-1 mb-3 bg-danger text-white col-12 error"
-        error_text = document.createTextNode(element.msg)
-        small.appendChild(error_text)
-        parent.insertBefore(small, input)
+            small = document.createElement('small')
+            small.className = " p-1 mb-3 bg-danger text-white col-12 error"
+            error_text = document.createTextNode(element.msg)
+            small.appendChild(error_text)
+            parent.insertBefore(small, input)
         }       
     
     })
@@ -47,15 +77,10 @@ remove_errors = ()=>{
     }
    
 }
+/// HELPERS end
 
-
-//Evenets and main fucntions
-submit_btn.addEventListener('click', (e)=>{
-    e.preventDefault()
-    remove_errors()
-    formData = appendto_form(inputs)
-   
-    console.log('submit btn clicked')
+//  fetch data 
+fetch_signup = (formData)=>{
     fetch('/signup', {
         method : "POST",
         headers: {
@@ -82,5 +107,55 @@ submit_btn.addEventListener('click', (e)=>{
        }
         
     })
+}
+fetch_login = (formData)=>{
+    fetch('/login', {
+        method : "POST",
+        headers: {
+            "Content-Disposition": "form-data",
+            'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+        body : formData,
+    }).then((response)=>{
+        if (!response.ok){
+            return response.json()
+          
+        }
+        else{
+            return response.json()
+        }
+        
+       
+    }).then((data)=>{
+        
+       if (data){
+           if(data.url) window.location.replace(data.url)
+           if(data.errors) set_errors(data.errors)        
+       }
+        
+    })
+}
+// end fetch data
+
+//Evenets and main fucntions
+signup_submit_btn.addEventListener('click', (e)=>{
+    e.preventDefault()
+    remove_errors()
+    formData = appendto_form(inputs)
+    fetch_signup(formData)
+   
 })
 
+login_submit_btn.addEventListener('click', (e)=>{
+    e.preventDefault()
+    remove_errors()
+    formData = appendto_form(inputs)
+    Array.prototype.forEach.call(inputs, element=>{
+        console.log(element.value)
+    })
+    fetch_login(formData)
+   
+})
+
+//Evenets and main fucntions end
