@@ -171,12 +171,13 @@ document.getElementById('side-nav-hideshow').addEventListener('click', e=>{
     main_page = document.getElementById('main-page')
     if(side_nave.className.includes('d-none')){
         side_nave.classList.remove('d-none')
-        side_nave.style.transition = "all 2s";
+        side_nave.classList.add('fadeInRight');
         main_page.classList.remove('wv-100')
         main_page.classList.add('w-80')
     }else{
         side_nave.classList.add('d-none')
         main_page.classList.add('wv-100')
+        side_nave.classList.remove('fadeInRight');
         main_page.classList.remove('w-80')
     }
 
