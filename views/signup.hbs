@@ -6,10 +6,10 @@
       <div class="text-center mb-4">
         <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
-            <a  goto='signup' class="nav-link nav-registration active " href="#signup">Signup</a>
+            <a  goto='signup' class=" bg-green nav-link nav-registration  active " href="#signup">Signup</a>
           </li>
           <li class="nav-item">
-            <a goto='login' class="nav-link nav-registration" href="#login">Login</a>
+            <a goto='login' class=" bg-green nav-link nav-registration" href="#login">Login</a>
           </li>
         </ul>
       </div>
@@ -18,26 +18,26 @@
     <!-- signup container -->
     <div class="d-show" id="signup">
         <div>
-          <h1 class="h2 text-center">ReciProg Signup form</h1>
+          <h1 class="h2 text-center text-white">ReciProg Signup form</h1>
         </div>
          <div class="pt-10" >
         <form  id="signup-form" action="/signup/" method="post">
-          <div class="form-group">
+          <div class="form-group text-white">
             <label for="exampleInputUsername">Username</label>
             <input name="username" type="username" class="form-control" id="exampleInputUsername" aria-describedby="usernameHelp">
           </div>
-          <div class="form-group">
+          <div class="form-group text-white">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             
           </div>
-          <div class="form-group">
+          <div class="form-group text-white">
             <label   for="exampleInputPassword1">Password</label>
             <input  name="password" type="password" class="form-control" id="exampleInputPassword1">
-            <small id="passwordHelp" class="form-text text-muted">use strong password please</small>
+            <small id="passwordHelp" class="form-text text-white">use strong password please</small>
           </div>
 
-          <button id="signup-submit-btn" for='signup-form'type="submit" class="btn btn-primary">Submit</button>
+          <button id="signup-submit-btn" for='signup-form'type="submit" class="btn-green">Submit</button>
         </form>
       
       </div>
@@ -47,22 +47,22 @@
     <!-- login container -->
     <div class="d-none" id="login">
        <div >
-            <h1 class="h2 text-center">ReciProg Login form</h1>
+            <h1 class="h2 text-center text-white">ReciProg Login form</h1>
           </div>
         <div class="pt-10" id="login-form">
          
           <form action="/login/" method="post">
-            <div class="form-group">
+            <div class="form-group text-white">
               <label for="exampleInputUsername1">Username</label>
               <input name="usernameLogin" type="text" class="form-control" id="exampleInputUsername1" aria-describedby="usernameHelp">
             </div>
-            <div class="form-group">
+            <div class="form-group text-white">
               <label   for="exampleInputPassword2">Password</label>
               <input  name="passwordLogin" type="password" class="form-control" id="exampleInputPassword2">
-              <small id="passwordHelp" class="form-text text-muted">use strong password please</small>
+              <small id="passwordHelp" class="form-text  text-white">use strong password please</small>
             </div>
 
-            <button id="login-submit-btn" for='login-form' type="submit" class="btn btn-primary">Submit</button>
+            <button id="login-submit-btn" for='login-form' type="submit" class="btn-green">Submit</button>
           </form>
         
         </div>

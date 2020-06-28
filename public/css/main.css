@@ -31,3 +31,38 @@
 
 /* fonts heights */
 
+/* font text color */
+.text-green{
+    color : #19AC85;
+}
+/* back ground colors */
+.bg-black, .bg-black ul li{
+    background-color: #232F3A;
+}
+.bg-green {
+    background-color: #19AC85;
+    color:white;
+}
+
+/* button background color */
+.btn-green, 
+.btn-green.active, 
+.btn-green:active{
+    background-color: #19AC85;
+    color: white;
+    border: 1px solid #19AC85;
+    border-radius: 7%;
+    padding: 0.5em 0.8em 0.5em 0.8em;
+}
+
+.btn-green:link{
+    background-color: #19AC85;
+    color: white;
+}
+
+.btn-green:hover{
+    background-color:white;
+    color: #19AC85;
+}
+
+/* border */

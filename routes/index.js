@@ -9,9 +9,9 @@ const responses_help = require('../helper/responses')
 home = router.get('/', (req, res, next) => {
   is_auth = req.session.user ? req.session.user.is_authenticated : false
   if (is_auth){
-    return res.render('home', {layout: 'default', template: 'home-template', is_authenticated : is_auth})
+    return res.render('home', {layout: 'default', template: 'bg-black', is_authenticated : is_auth})
   }
-  return res.render('signup', {layout: 'default', template: 'home-template'});
+  return res.render('signup', {layout: 'default', template: 'bg-black'});
 })
 
 signup = router.post('/signup', validation, (req, res, next) => {
