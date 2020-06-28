@@ -1,8 +1,13 @@
 nav_registrations = document.getElementsByClassName('nav-registration')
-form  =  document.getElementsByTagName('form')[0]
+form  =  document.getElementsByTagName('form')[0] 
+
+if(form) {
 inputs = form.getElementsByTagName('input')
 signup_submit_btn = document.getElementById('signup-submit-btn')
 login_submit_btn = document.getElementById('login-submit-btn')
+
+
+
 
 remove_class= (elements , class_name)=>{
     Array.prototype.forEach.call(elements, element=>{
@@ -159,5 +164,20 @@ login_submit_btn.addEventListener('click', (e)=>{
 })
 
 //Evenets and main fucntions end
-
+}   
 // hide and show side bar //
+document.getElementById('side-nav-hideshow').addEventListener('click', e=>{
+    side_nave = document.getElementById('side-bar')
+    main_page = document.getElementById('main-page')
+    if(side_nave.className.includes('d-none')){
+        side_nave.classList.remove('d-none')
+        side_nave.style.transition = "all 2s";
+        main_page.classList.remove('wv-100')
+        main_page.classList.add('w-80')
+    }else{
+        side_nave.classList.add('d-none')
+        main_page.classList.add('wv-100')
+        main_page.classList.remove('w-80')
+    }
+
+})
