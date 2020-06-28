@@ -64,5 +64,17 @@
     background-color:white;
     color: #19AC85;
 }
+.btn-green:focus{
+    background-color: #19AC85;
+    color: white;
+    border: 4px solid  #19AC85;
+
+}
 
 /* border */
+.border-grey-l{
+    border-left: 1px solid #4A5967;
+}
+.border-grey-b{
+    border-bottom: 1px solid #4A5967;
+}

@@ -159,3 +159,5 @@ login_submit_btn.addEventListener('click', (e)=>{
 })
 
 //Evenets and main fucntions end
+
+// hide and show side bar //

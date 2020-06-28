@@ -45,10 +45,14 @@ login_user =  (username, password,res,req)=>{
         }
         else{
             
-            return res.status(422).json({errors : [{
-                value: password,
+            return res.status(422).json({errors : [
+                {value: password,
                 msg: 'wrong password or username',
                 param: 'passwordLogin',
+                location: 'body'},            
+                {value: username,
+                msg: 'wrong password or username',
+                param: 'usernameLogin',
                 location: 'body'}]})
         }
     })

@@ -4,11 +4,11 @@
   <div id="registration-form" class="container mt-5 form-center">
     <!-- navbar container -->
       <div class="text-center mb-4">
-        <ul class="nav nav-tabs card-header-tabs">
-          <li class="nav-item">
+        <ul class="nav nav-tabs card-header-tabs row">
+          <li class="nav-item col-6">
             <a  goto='signup' class=" bg-green nav-link nav-registration  active " href="#signup">Signup</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item  col-6">
             <a goto='login' class=" bg-green nav-link nav-registration" href="#login">Login</a>
           </li>
         </ul>
@@ -21,7 +21,7 @@
           <h1 class="h2 text-center text-white">ReciProg Signup form</h1>
         </div>
          <div class="pt-10" >
-        <form  id="signup-form" action="/signup/" method="post">
+        <form class="pb-3" id="signup-form" action="/signup/" method="post">
           <div class="form-group text-white">
             <label for="exampleInputUsername">Username</label>
             <input name="username" type="username" class="form-control" id="exampleInputUsername" aria-describedby="usernameHelp">
@@ -51,7 +51,7 @@
           </div>
         <div class="pt-10" id="login-form">
          
-          <form action="/login/" method="post">
+          <form class="pb-3" action="/login/" method="post">
             <div class="form-group text-white">
               <label for="exampleInputUsername1">Username</label>
               <input name="usernameLogin" type="text" class="form-control" id="exampleInputUsername1" aria-describedby="usernameHelp">
