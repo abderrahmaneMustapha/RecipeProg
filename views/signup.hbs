@@ -22,6 +22,7 @@
         </div>
          <div class="pt-10" >
         <form class="pb-3" id="signup-form" action="/signup/" method="post">
+        <input type="hidden" name="_csrf" value="">
           <div class="form-group text-white">
             <label for="exampleInputUsername">Username</label>
             <input name="username" type="username" class="form-control" id="exampleInputUsername" aria-describedby="usernameHelp">
@@ -52,6 +53,7 @@
         <div class="pt-10" id="login-form">
          
           <form class="pb-3" action="/login/" method="post">
+          <input type="hidden" name="_csrf" value="">
             <div class="form-group text-white">
               <label for="exampleInputUsername1">Username</label>
               <input name="usernameLogin" type="text" class="form-control" id="exampleInputUsername1" aria-describedby="usernameHelp">

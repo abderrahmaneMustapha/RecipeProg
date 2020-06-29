@@ -86,12 +86,14 @@ remove_errors = ()=>{
 
 //  fetch data 
 fetch_signup = (formData)=>{
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     fetch('/signup', {
         method : "POST",
         headers: {
             "Content-Disposition": "form-data",
             'Content-Type': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'CSRF-Token': token
           },
         body : formData,
     }).then((response)=>{
@@ -114,12 +116,14 @@ fetch_signup = (formData)=>{
     })
 }
 fetch_login = (formData)=>{
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     fetch('/login', {
         method : "POST",
         headers: {
             "Content-Disposition": "form-data",
             'Content-Type': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'CSRF-Token': token
           },
         body : formData,
     }).then((response)=>{
@@ -149,7 +153,6 @@ signup_submit_btn.addEventListener('click', (e)=>{
     remove_errors()
     formData = appendto_form(inputs)
     fetch_signup(formData)
-   
 })
 
 login_submit_btn.addEventListener('click', (e)=>{
@@ -160,7 +163,6 @@ login_submit_btn.addEventListener('click', (e)=>{
         console.log(element.value)
     })
     fetch_login(formData)
-   
 })
 
 //Evenets and main fucntions end

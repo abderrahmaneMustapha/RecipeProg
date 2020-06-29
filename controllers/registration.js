@@ -37,11 +37,11 @@ login_user =  (username, password,res,req)=>{
     models.findOne({username : username }, (err, user) =>{
         if(user.password === password){
             req.session.user = {
-                username : req.body.username,
+                username : username,
                 email : req.body.email,
                 is_authenticated : true
             } 
-            return res.status(200).json({url : `/profile?username=${req.body.username}`})
+            return res.status(200).json({url : `/profile?username=${username}`})
         }
         else{
             

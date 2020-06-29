@@ -5,16 +5,21 @@ const { body,validationResult,  sanitizeBody, check } = require('express-validat
 const validation = require('../controllers/validation')
 const register  = require('../controllers/registration')
 const responses_help = require('../helper/responses')
+const csrf = require('csurf')
+const csrfProtection = csrf({ cookie: true })
+const bodyParser = require('body-parser')
+const parseForm = bodyParser.urlencoded({ extended: false })
 
-home = router.get('/', (req, res, next) => {
+home = router.get('/', csrfProtection,(req, res, next) => {
   is_auth = req.session.user ? req.session.user.is_authenticated : false
   if (is_auth){
     return res.render('home', {layout: 'default', template: 'bg-black', is_authenticated : is_auth})
   }
-  return res.render('signup', {layout: 'default', template: 'bg-black'});
+
+  return res.render('signup', {layout: 'default', template: 'bg-black', csrfToken: req.csrfToken()});
 })
 
-signup = router.post('/signup', validation, (req, res, next) => {
+signup = router.post('/signup',parseForm,csrfProtection, validation.signup_validation, (req, res, next) => {
   // validate the form
    const errors = validationResult(req)
   
@@ -30,7 +35,7 @@ signup = router.post('/signup', validation, (req, res, next) => {
    
 })
 
-login = router.post('/login', (req,res,next)=>{
+login = router.post('/login',parseForm,csrfProtection,validation.login_validation, (req,res,next)=>{
  console.log("login post request....")
  login_user(req.body.usernameLogin, req.body.passwordLogin, res,req)
 })

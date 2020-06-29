@@ -3,11 +3,17 @@ const path = require('path')
 const hbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const session = require('express-session');
+
 const MongoDBStore = require('connect-mongodb-session')(session);
+
+const bodyParser = require('body-parser')
+
+const cookieParser = require('cookie-parser')
+
 
 const app = express()
 
-
+app.use(cookieParser())
 // connect to the database
 var uri = "mongodb://localhost:27017/recipe"
 mongoose.connect(uri, { useNewUrlParser: true , useUnifiedTopology: true })
@@ -33,8 +39,8 @@ app.engine( 'hbs', hbs( {
 app.set('view engine', 'hbs');
 
 // init static file folder
-app.use(express.json());
-app.use(express.urlencoded());
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname,'/public')))
 
 
