@@ -30,9 +30,8 @@ progress::-webkit-progress-bar {
 }
 
 .w-80{
-    width: 80vw;
     max-width: 100vw;
-    min-width: 80vw;
+    min-width: 77.5vw;
 }
 
 .w-90{
@@ -99,23 +98,33 @@ progress::-webkit-progress-bar {
 .text-green{
     color : #19AC85;
 }
-text
+
 .side-nav-link{
     color: #19AC85;
+    padding: 0.3em; 
 }
 
 .side-nav-link:active{
     color: #19AC85;
+
+    
 }
 
 .side-nav-link:hover{
-
     color: #19AC85; 
+    background-color: #b4e2d6;
+    border-radius: 50%;
+      
     transition: 0.3s;
-    opacity: 0.7;
+    
 }
+
+
 /* back ground colors */
 .bg-black, .bg-black ul li{
+    background-color: #232F3A;
+}
+.bg-black-1{
     background-color: #232F3A;
 }
 .bg-green {
@@ -124,6 +133,9 @@ text
 }
 .bg-grey{
 background-color: #4A5967;
+}
+.min-h-50{
+    min-height: 50vh;
 }
 .black-back-50{
     background: linear-gradient(90deg,#232F3A 66% ,#35434f 34%);
@@ -161,7 +173,10 @@ background-color: #4A5967;
 .btn-green:hover{
     background-color:white;
     color: #19AC85;
+   
 }
+
+
 .btn-green:focus{
     background-color: #19AC85;
     color: white;
@@ -189,4 +204,19 @@ background-color: #4A5967;
 
 .profile-image-container{
     max-width: fit-content;
+}
+
+/*  side nav */
+#side-bar{
+    position: fixed;
+    left:auto;
+    right:0;
+}
+
+#side-nav-hideshow:hover{
+    cursor: pointer;
+}
+#side-nav-hideshow:hover svg{
+    box-shadow:  4px 4px 10px 10px rgba(230, 224, 224, 0.945);
+    background-color:rgba(230, 224, 224, 0.945) ;
 }
