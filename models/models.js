@@ -8,4 +8,12 @@ let User = new Schema({
     email : { type : String ,required : [true, ' this field is required']  }
 })
 
-module.exports =  mongoose.model("User", User)
+let Recipe = new Schema({
+    name: { type : String, required:[true, ' this field is required']},
+    username : {type: User , required:[true,' this field is required' ]}, 
+    rating  : {type: Number, min: [-1, 'rating must be positive'],max:5}
+
+})
+
+user= mongoose.model("User", User)
+module.exports =  { user , recipe}
