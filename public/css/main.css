@@ -99,6 +99,16 @@ progress::-webkit-progress-bar {
     color : #19AC85;
 }
 
+.text-hover-muted{
+ color:#6C757D;
+}
+.text-hover-muted:hover{
+    color:#35434F;
+}
+
+.btn:hover .text-hover-muted{
+    color:#35434F;
+}
 .side-nav-link{
     color: #19AC85;
     padding: 0.3em; 
