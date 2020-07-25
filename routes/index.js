@@ -36,7 +36,6 @@ signup = router.post('/signup',parseForm,csrfProtection, validation.signup_valid
 })
 
 login = router.post('/login',parseForm,csrfProtection,validation.login_validation, (req,res,next)=>{
- console.log("login post request....")
  login_user(req.body.usernameLogin, req.body.passwordLogin, res,req)
 })
 
@@ -46,7 +45,7 @@ signout = router.get('/logout', (req,res,next)=>{
   res.redirect('/');
 })
 
-profile = router.get('/profile', (req, res, next) => {
+profile = router.get('/profile',csrfProtection, (req, res, next) => {
   is_your_profile = true
   template  = "othersprofile-template"
   view = "others-profile"
@@ -56,12 +55,22 @@ profile = router.get('/profile', (req, res, next) => {
    view = "user-profile"
   }
  
-  res.render(view, {layout: 'default', template: template, is_authenticated : req.session.user.is_authenticated});
+  res.render(view, {layout: 'default',csrfToken: req.csrfToken(), template: template, is_authenticated : req.session.user.is_authenticated});
 })
 
 about = router.get('/about', (req, res, next) => {
     res.render('about', {layout: 'default', template: 'about-template', is_authenticated : req.session.user.is_authenticated});
 })
 
+add_recipe =router.post("/recipe/add",parseForm,csrfProtection,validation.add_recipe_validation,(req, res, next)=>{
+   // validate the form
+   const errors = validationResult(req)
+  
+   if(!errors.isEmpty()){
+      /// if there is an error tell the client
+      console.log(errors)
+     return res.status(422).json({errors : errors.array()})
+   }
+})
 
-module.exports = {home, about,profile, signout}
+module.exports = {home, about,profile, signout,add_recipe}

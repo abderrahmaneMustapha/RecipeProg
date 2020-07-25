@@ -10,10 +10,12 @@ let User = new Schema({
 
 let Recipe = new Schema({
     name: { type : String, required:[true, ' this field is required']},
+    notes: { type : String, required:[true, ' this field is required']},
     username : {type: User , required:[true,' this field is required' ]}, 
     rating  : {type: Number, min: [-1, 'rating must be positive'],max:5}
 
 })
 
 user= mongoose.model("User", User)
+recipe= mongoose.model("Recipe", Recipe)
 module.exports =  { user , recipe}

@@ -3,9 +3,10 @@ form  =  document.getElementsByTagName('form')[0]
 
 if(form) {
 inputs = form.getElementsByTagName('input')
+textareas = form.getElementsByTagName('textarea')
 signup_submit_btn = document.getElementById('signup-submit-btn')
 login_submit_btn = document.getElementById('login-submit-btn')
-
+add_recipe_submit_btn = document.getElementById('add-recipe-submit-btn')
 
 
 
@@ -42,9 +43,9 @@ Array.prototype.forEach.call(nav_registrations, element=>{
 appendto_form = (inputs)=>{
      formData = new FormData()
      Array.prototype.forEach.call(inputs, element=>{
-        name = element.name  || element.getAttribute('name') 
+        name = element.name  || element.getAttribute('name') || element.id
         value = element.getAttribute('value') || element.value
-        console.log(name)
+      
         if (value && name){
           
             formData.append(name, value)
@@ -145,25 +146,68 @@ fetch_login = (formData)=>{
         
     })
 }
+fetch_add_recipe = (formData)=>{
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    console.log(token)
+    fetch('/recipe/add/', {
+        method : "POST",
+        headers: {
+            "Content-Disposition": "form-data",
+            'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'CSRF-Token': token
+          },
+        body : formData,
+    }).then((response)=>{
+        if (!response.ok){
+            return response.json()
+          
+        }
+        else{
+            return response.json()
+        }
+        
+       
+    }).then((data)=>{
+        
+       if (data){
+           if(data.url) window.location.replace(data.url)
+           if(data.errors) set_errors(data.errors)        
+       }
+        
+    })   
+}
 // end fetch data
 
 //Evenets and main fucntions
-signup_submit_btn.addEventListener('click', (e)=>{
-    e.preventDefault()
-    remove_errors()
-    formData = appendto_form(inputs)
-    fetch_signup(formData)
-})
-
-login_submit_btn.addEventListener('click', (e)=>{
-    e.preventDefault()
-    remove_errors()
-    formData = appendto_form(inputs)
-    Array.prototype.forEach.call(inputs, element=>{
-        console.log(element.value)
+// login or signup
+if(signup_submit_btn && login_submit_btn ){
+    signup_submit_btn.addEventListener('click', (e)=>{
+        e.preventDefault()
+        remove_errors()
+        formData = appendto_form(inputs)
+        fetch_signup(formData)
     })
-    fetch_login(formData)
-})
+    
+    login_submit_btn.addEventListener('click', (e)=>{
+        e.preventDefault()
+        remove_errors()
+        formData = appendto_form(inputs)
+       
+        fetch_login(formData)
+    })
+    
+}
+//add recipes
+if(add_recipe_submit_btn)
+{
+    add_recipe_submit_btn.addEventListener('click', (e)=>{
+        e.preventDefault()
+        remove_errors()
+        formData = appendto_form(inputs)
+        fetch_add_recipe(formData)
+    })
+}
 
 //Evenets and main fucntions end
 }   

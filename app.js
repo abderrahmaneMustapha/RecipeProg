@@ -78,7 +78,7 @@ app.use(routers.signout)
 app.use(routers.home)
 app.use(routers.about)
 app.use(routers.profile)
-
+app.use(routers.add_recipe)
 
 const PORT = process.env.PORT || 8000
 app.listen(PORT, ()=> console.log(`Server started at port ${PORT}`))

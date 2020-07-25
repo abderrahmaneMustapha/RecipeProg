@@ -2,9 +2,9 @@ let models = require('../models/models')
 let hash = require('../helper/hashing')
 create_user  = (username,  email, password, fn,res,req)=>{
     
-    models.exists({username:username}).then(( exists)=>{
+    models.user.exists({username:username}).then(( exists)=>{
         if (!exists){
-            new_user  = new  models({username : username, email: email, password:hash(password)})
+            new_user  = new  models.user({username : username, email: email, password:hash(password)})
             
             new_user.save((err)=>{
                 if(err){
@@ -34,7 +34,7 @@ login_user =  (username, password,res,req)=>{
     password = hash(password)
     
     
-    models.findOne({username : username }, (err, user) =>{
+    models.user.findOne({username : username }, (err, user) =>{
         if(user.password === password){
             req.session.user = {
                 username : username,
