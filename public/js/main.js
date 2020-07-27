@@ -1,3 +1,5 @@
+
+
 nav_registrations = document.getElementsByClassName('nav-registration')
 form  =  document.getElementsByTagName('form')[0] 
 
@@ -7,7 +9,6 @@ textareas = form.getElementsByTagName('textarea')
 signup_submit_btn = document.getElementById('signup-submit-btn')
 login_submit_btn = document.getElementById('login-submit-btn')
 add_recipe_submit_btn = document.getElementById('add-recipe-submit-btn')
-
 
 
 remove_class= (elements , class_name)=>{
@@ -40,8 +41,8 @@ Array.prototype.forEach.call(nav_registrations, element=>{
 //////////// REEGISTRATION PART
 
 /// HELPERS
-appendto_form = (inputs)=>{
-     formData = new FormData()
+appendto_form = (inputs,formData)=>{
+     
      Array.prototype.forEach.call(inputs, element=>{
         name = element.name  || element.getAttribute('name') || element.id
         value = element.getAttribute('value') || element.value
@@ -59,7 +60,7 @@ appendto_form = (inputs)=>{
 set_errors = (errors) =>{
     errors.forEach((element)=>{
        input = document.querySelectorAll(`[name=${element.param}]`)[0]
-       console.log(input)
+        console.log(errors)
        parent= input.parentNode
  
        if (!parent.getElementsByClassName('bg-danger')[0]){
@@ -98,13 +99,8 @@ fetch_signup = (formData)=>{
           },
         body : formData,
     }).then((response)=>{
-        if (!response.ok){
+    
             return response.json()
-          
-        }
-        else{
-            return response.json()
-        }
         
        
     }).then((data)=>{
@@ -128,13 +124,8 @@ fetch_login = (formData)=>{
           },
         body : formData,
     }).then((response)=>{
-        if (!response.ok){
+       
             return response.json()
-          
-        }
-        else{
-            return response.json()
-        }
         
        
     }).then((data)=>{
@@ -148,7 +139,6 @@ fetch_login = (formData)=>{
 }
 fetch_add_recipe = (formData)=>{
     const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    console.log(token)
     fetch('/recipe/add/', {
         method : "POST",
         headers: {
@@ -158,23 +148,26 @@ fetch_add_recipe = (formData)=>{
             'CSRF-Token': token
           },
         body : formData,
-    }).then((response)=>{
-        if (!response.ok){
-            return response.json()
+    }).then((response)=> { 
+
+        return response.json()})
+    .then((data)=>{
+       if (data.data){
+        message = document.getElementById('messages') 
+        setTimeout(()=>{
+            message.className='alert alert-success'
+            message.setAttribute('role', 'alert')
+            message.innerText = data.data 
+        }, 400)
+        message.className='d-none'
           
-        }
-        else{
-            return response.json()
-        }
-        
-       
-    }).then((data)=>{
-        
-       if (data){
-           if(data.url) window.location.replace(data.url)
-           if(data.errors) set_errors(data.errors)        
+       }
+       else{
+        set_errors(data.errors) 
        }
         
+    }).catch((err)=>{
+        console.log(err)
     })   
 }
 // end fetch data
@@ -204,7 +197,12 @@ if(add_recipe_submit_btn)
     add_recipe_submit_btn.addEventListener('click', (e)=>{
         e.preventDefault()
         remove_errors()
-        formData = appendto_form(inputs)
+        notes  = document.getElementById('notes')
+    
+        formData = new FormData()
+        formData = appendto_form(inputs,formData)
+        formData.append("notes" , notes.value)
+        
         fetch_add_recipe(formData)
     })
 }

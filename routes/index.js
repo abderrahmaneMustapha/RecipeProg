@@ -9,6 +9,8 @@ const csrf = require('csurf')
 const csrfProtection = csrf({ cookie: true })
 const bodyParser = require('body-parser')
 const parseForm = bodyParser.urlencoded({ extended: false })
+var  models = require('../models/models');
+const { recipe } = require('../models/models');
 
 home = router.get('/', csrfProtection,(req, res, next) => {
   is_auth = req.session.user ? req.session.user.is_authenticated : false
@@ -65,11 +67,27 @@ about = router.get('/about', (req, res, next) => {
 add_recipe =router.post("/recipe/add",parseForm,csrfProtection,validation.add_recipe_validation,(req, res, next)=>{
    // validate the form
    const errors = validationResult(req)
-  
    if(!errors.isEmpty()){
       /// if there is an error tell the client
-      console.log(errors)
      return res.status(422).json({errors : errors.array()})
+   }
+   else{
+     console.log(req.body.notes)
+      let recipe = new models.recipe({
+        name:req.body.name, 
+        notes: req.body.notes,
+        rating: 0, 
+        username: req.session.user.username})
+      recipe.save((errors)=>{
+        if(errors ) {
+          console.log("we have an error ", errors)
+          return res.status(422).json({errors : errors.array()})
+        }
+        else{
+          console.log('user saved ')
+        }
+      })
+     return res.status(200).json({data: "recipe added succesfully"})
    }
 })
 

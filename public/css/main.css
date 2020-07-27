@@ -1,3 +1,4 @@
+/* progress bar */
 progress {
     -webkit-appearance:none ;
     
@@ -8,6 +9,7 @@ progress::-webkit-progress-bar {
   progress::-webkit-progress-value {
     background-color: #19AC85;
   }
+
 
 /* grids and flex boxes */
 .grid-2-auto{
@@ -163,6 +165,10 @@ background-color: #4A5967;
     text-decoration: underline;
 }
 
+/* inputs */
+* textarea{
+    resize: none;
+}
 
 
 .btn-green, 

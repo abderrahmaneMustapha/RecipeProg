@@ -35,6 +35,18 @@ login_user =  (username, password,res,req)=>{
     
     
     models.user.findOne({username : username }, (err, user) =>{
+        if (!user){
+            return res.status(422).json({errors : [
+                {value: password,
+                msg: 'wrong password or user name',
+                param: 'passwordLogin',
+                location: 'body'},            
+                {value: username,
+                msg: 'wrong password or username',
+                param: 'usernameLogin',
+                location: 'body'}]})
+        }
+
         if(user.password === password){
             req.session.user = {
                 username : username,
