@@ -57,7 +57,9 @@
                 <div class="modal fade" id="new-recipe-modal" tabindex="-1" role="dialog" aria-labelledby="NewRecipeLabel" aria-hidden="true">
                     <div class=" modal-dialog  modal-xl mt-5 ">
                         <div class="modal-content p-5">
-                            <div class="container">
+                            <div class="modal-body">
+                                <div  class="w-100 d-none" id="modal-add-message"></div>
+                                <div class="container">
                                 <header class="my-5">
                                     <h3 class="h3 text-center ">Add new recipe</h3>
                                 </header>
@@ -75,11 +77,14 @@
                                                 <label for="notes">Notes</label>
                                                 <textarea   class="form-control" name="notes" id="notes" aria-describedby="notesHelp"></textarea>                                    
                                             </div>
-                                            <button id="add-recipe-submit-btn" class="btn-green">Submit</button>
+                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                                <button id="add-recipe-submit-btn" class="btn-green">Submit</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
+                            </div>
+                            
                         </div> 
                     </div>                                       
                 </div> 

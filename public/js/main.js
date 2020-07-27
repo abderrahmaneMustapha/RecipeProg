@@ -153,13 +153,13 @@ fetch_add_recipe = (formData)=>{
         return response.json()})
     .then((data)=>{
        if (data.data){
-        message = document.getElementById('messages') 
+        message = document.getElementById('modal-add-message') 
         setTimeout(()=>{
             message.className='alert alert-success'
             message.setAttribute('role', 'alert')
             message.innerText = data.data 
         }, 400)
-        message.className='d-none'
+       
           
        }
        else{
