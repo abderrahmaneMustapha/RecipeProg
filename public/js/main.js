@@ -178,6 +178,7 @@ if(signup_submit_btn && login_submit_btn ){
     signup_submit_btn.addEventListener('click', (e)=>{
         e.preventDefault()
         remove_errors()
+        formData = new FormData()
         formData = appendto_form(inputs)
         fetch_signup(formData)
     })
@@ -185,6 +186,7 @@ if(signup_submit_btn && login_submit_btn ){
     login_submit_btn.addEventListener('click', (e)=>{
         e.preventDefault()
         remove_errors()
+        formData = new FormData()
         formData = appendto_form(inputs)
        
         fetch_login(formData)
